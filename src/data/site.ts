@@ -6,7 +6,7 @@ export const site = {
   serviceArea: "Utah & Salt Lake Counties",
   // TODO: replace with the Google Voice number (set up at voice.google.com).
   // Keep this off the personal cell — wedding vendor sites are heavy scrape targets.
-  phone: "(GOOGLE VOICE NUMBER)",
+  phone: "801-382-7636",
   email: "sarah@avocet-av.com",
   url: "https://avocet-av.com",
 } as const;
