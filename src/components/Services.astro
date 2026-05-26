@@ -1,0 +1,71 @@
+---
+const services = [
+  {
+    title: "Reception sound",
+    body: "Background music while guests mingle, transitioning into dance-friendly playlists. We tune the room so vocals stay clear and bass stays out of conversations.",
+  },
+  {
+    title: "Ceremony amplification",
+    body: "A small PA and lapel mic for the officiant, plus playback for processional and recessional music. Especially valuable for outdoor ceremonies.",
+  },
+  {
+    title: "Wireless mics for your MC",
+    body: "Two handheld wireless mics for the MC, toasts, prayers, and announcements. We handle the audio so your people can focus on what they're saying.",
+  },
+];
+---
+
+<section class="services section" id="what-we-do">
+  <div class="container">
+    <div class="services__intro">
+      <p class="eyebrow">What we do</p>
+      <h2>Polished, well-paced — not a club night.</h2>
+      <p class="muted">
+        Most of our clients want their reception to sound great without the
+        cost or energy of a traditional wedding DJ. That's the gap we fill.
+      </p>
+    </div>
+    <ul class="services__grid">
+      {services.map((s) => (
+        <li class="services__item">
+          <h3>{s.title}</h3>
+          <p>{s.body}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--color-cream);
+  }
+
+  .services__intro {
+    margin-bottom: var(--space-12);
+    max-width: 38rem;
+  }
+
+  .services__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .services__item {
+    border-top: 1px solid color-mix(in srgb, var(--color-rust) 35%, transparent);
+    padding-top: 1.25rem;
+  }
+
+  .services__item h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .services__item p {
+    margin: 0;
+    color: var(--color-charcoal);
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+import { faqs } from "../data/faqs.ts";
+---
+
+<section class="faq section" id="faq">
+  <div class="container">
+    <div class="faq__intro">
+      <p class="eyebrow">Frequently asked</p>
+      <h2>Things people ask before booking.</h2>
+    </div>
+    <ul class="faq__list">
+      {faqs.map((f) => (
+        <li class="faq__item">
+          <details>
+            <summary>
+              <span>{f.question}</span>
+              <span class="faq__chevron" aria-hidden="true">+</span>
+            </summary>
+            <div class="faq__answer">
+              <p>{f.answer}</p>
+            </div>
+          </details>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .faq {
+    background: var(--color-cream);
+  }
+
+  .faq__intro {
+    margin-bottom: var(--space-8);
+    max-width: 38rem;
+  }
+
+  .faq__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 48rem;
+  }
+
+  .faq__item {
+    border-top: 1px solid color-mix(in srgb, var(--color-slate-soft) 50%, transparent);
+  }
+
+  .faq__item:last-child {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-slate-soft) 50%, transparent);
+  }
+
+  details summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.25rem;
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__chevron {
+    color: var(--color-rust);
+    font-size: 1.25rem;
+    font-family: var(--font-body);
+    transition: transform 160ms ease;
+    line-height: 1;
+  }
+
+  details[open] .faq__chevron {
+    transform: rotate(45deg);
+  }
+
+  .faq__answer {
+    padding-bottom: 1.25rem;
+    color: var(--color-charcoal);
+  }
+
+  .faq__answer p {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+import { site } from "../data/site.ts";
+import AvocetMark from "./AvocetMark.astro";
+
+const path = Astro.url.pathname;
+const isHome = path === "/" || path === "";
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="wordmark" aria-label={`${site.name} — home`}>
+      <AvocetMark class="wordmark__mark" />
+      <span class="wordmark__text">{site.name}</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/#packages">Packages</a>
+      <a href="/#availability">Availability</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/contact" class:list={["site-nav__cta", { "is-active": !isHome }]}>Contact</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    padding-block: 1.25rem;
+    background: var(--color-cream);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-slate-soft) 40%, transparent);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+
+  .wordmark__mark {
+    width: 1.75rem;
+    height: auto;
+    color: var(--color-rust);
+  }
+
+  .wordmark__text {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+    font-size: 0.95rem;
+  }
+
+  .site-nav a {
+    color: var(--color-charcoal);
+    text-decoration: none;
+    padding-block: 0.25rem;
+    border-bottom: 1px solid transparent;
+  }
+
+  .site-nav a:hover {
+    color: var(--color-rust);
+    border-bottom-color: var(--color-rust);
+  }
+
+  .site-nav__cta {
+    color: var(--color-rust) !important;
+    font-weight: 500;
+  }
+
+  .site-nav__cta.is-active {
+    border-bottom-color: var(--color-rust) !important;
+  }
+
+  @media (max-width: 540px) {
+    .site-nav a:not(.site-nav__cta) {
+      display: none;
+    }
+  }
+</style>

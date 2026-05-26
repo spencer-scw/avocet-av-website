@@ -1,0 +1,154 @@
+---
+import { packages, additionalHourRate, promotion } from "../data/packages.ts";
+---
+
+<section class="pricing section" id="packages">
+  <div class="container">
+    <div class="pricing__intro">
+      <p class="eyebrow">Packages</p>
+      <h2>Straightforward, predictable pricing.</h2>
+      <p class="muted">
+        Each package covers a fixed window — set up, run, and pack out. Need
+        more time? Add hours at a flat rate. No surprise bills.
+      </p>
+    </div>
+    {promotion.active && (
+      <aside class="pricing__promo" role="note" aria-label="Limited-time offer">
+        <p class="pricing__promo-eyebrow">{promotion.headline} · {promotion.percentOff}% off</p>
+        <p class="pricing__promo-body">{promotion.body}</p>
+      </aside>
+    )}
+    <ul class="pricing__grid">
+      {packages.map((p) => (
+        <li class:list={["pricing__card", { "pricing__card--featured": p.featured }]}>
+          {p.featured && <span class="pricing__badge">Most booked</span>}
+          <h3 class="pricing__name">{p.name}</h3>
+          <p class="pricing__duration">{p.duration}</p>
+          <p class="pricing__price">{p.price}</p>
+          {p.regularPrice && (
+            <p class="pricing__regular">Regularly {p.regularPrice}</p>
+          )}
+          <p class="pricing__desc">{p.description}</p>
+        </li>
+      ))}
+    </ul>
+    <p class="pricing__footnote">
+      {additionalHourRate}<span class="sep" aria-hidden="true">·</span>Travel beyond service area quoted separately.
+    </p>
+  </div>
+</section>
+
+<style>
+  .pricing {
+    background: var(--color-cream-warm);
+  }
+
+  .pricing__intro {
+    margin-bottom: var(--space-8);
+    max-width: 38rem;
+  }
+
+  .pricing__promo {
+    margin-bottom: var(--space-8);
+    padding: 1rem 1.25rem;
+    background: color-mix(in srgb, var(--color-rust-soft) 22%, var(--color-cream));
+    border-left: 3px solid var(--color-rust);
+    max-width: 44rem;
+  }
+
+  .pricing__promo-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-rust-deep);
+    margin: 0 0 0.5rem;
+  }
+
+  .pricing__promo-body {
+    margin: 0;
+    color: var(--color-charcoal);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .pricing__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  .pricing__card {
+    position: relative;
+    background: var(--color-cream);
+    border: 1px solid color-mix(in srgb, var(--color-slate-soft) 50%, transparent);
+    padding: 1.75rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .pricing__card--featured {
+    border-color: var(--color-rust);
+    box-shadow: 0 0 0 1px var(--color-rust);
+  }
+
+  .pricing__badge {
+    position: absolute;
+    top: -0.625rem;
+    left: 1.5rem;
+    background: var(--color-rust);
+    color: var(--color-cream);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius);
+  }
+
+  .pricing__name {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .pricing__duration {
+    color: var(--color-slate);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .pricing__price {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--color-rust);
+    margin: 0.25rem 0 0;
+    font-weight: 500;
+  }
+
+  .pricing__regular {
+    margin: 0.125rem 0 0.5rem;
+    color: var(--color-slate);
+    font-size: 0.85rem;
+    text-decoration: line-through;
+    text-decoration-color: color-mix(in srgb, var(--color-slate) 60%, transparent);
+    text-decoration-thickness: 1px;
+  }
+
+  .pricing__desc {
+    margin: 0;
+    color: var(--color-charcoal);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .pricing__footnote {
+    margin-top: 1.5rem;
+    color: var(--color-slate);
+    font-size: 0.9rem;
+  }
+</style>

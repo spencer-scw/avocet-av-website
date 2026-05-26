@@ -1,0 +1,38 @@
+---
+type Props = {
+  class?: string;
+  title?: string;
+};
+
+const { class: className, title = "Avocet" } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 120 80"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label={title}
+>
+  <title>{title}</title>
+  <g fill="currentColor" stroke="none">
+    <ellipse cx="62" cy="48" rx="24" ry="9"></ellipse>
+    <path
+      d="M 46 41 C 42 30 40 20 42 10 C 45 5 50 5 51 11 C 51 22 50 32 50 42 Z"
+    ></path>
+    <circle cx="46" cy="9" r="4.5"></circle>
+  </g>
+  <path
+    d="M 42 7 Q 28 8 8 2"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+  ></path>
+  <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+    <line x1="56" y1="56" x2="53" y2="74"></line>
+    <line x1="64" y1="56" x2="67" y2="74"></line>
+    <line x1="53" y1="74" x2="50" y2="76"></line>
+    <line x1="67" y1="74" x2="70" y2="76"></line>
+  </g>
+</svg>

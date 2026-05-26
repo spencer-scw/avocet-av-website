@@ -1,0 +1,53 @@
+---
+import { site } from "../data/site.ts";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <div class="site-footer__name">{site.name}</div>
+      <div class="muted">{site.serviceArea}</div>
+    </div>
+    <div class="site-footer__contact">
+      <a href={`tel:${site.phone.replace(/[^0-9+]/g, "")}`}>{site.phone}</a>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </div>
+    <div class="site-footer__copyright muted">© {year} {site.name}</div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid color-mix(in srgb, var(--color-slate-soft) 40%, transparent);
+    padding-block: 2.5rem;
+    background: var(--color-cream-warm);
+    font-size: 0.95rem;
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2rem;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .site-footer__name {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .site-footer__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .site-footer__copyright {
+    font-size: 0.875rem;
+  }
+</style>

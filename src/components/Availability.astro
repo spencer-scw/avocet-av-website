@@ -1,0 +1,180 @@
+---
+const today = new Date().toISOString().slice(0, 10);
+const maxDate = new Date();
+maxDate.setFullYear(maxDate.getFullYear() + 2);
+const max = maxDate.toISOString().slice(0, 10);
+---
+
+<section class="availability section" id="availability">
+  <div class="container availability__inner">
+    <p class="eyebrow">Availability</p>
+    <h2>Got a date in mind?</h2>
+    <p class="muted availability__lede">
+      Check whether we're free for your event. We'll confirm details and pricing once you reach out.
+    </p>
+    <form class="availability__form" data-availability-form>
+      <label for="event-date" class="visually-hidden">Event date</label>
+      <input
+        type="date"
+        id="event-date"
+        name="event-date"
+        min={today}
+        max={max}
+        required
+        autocomplete="off"
+        data-1p-ignore
+        data-lpignore="true"
+        data-form-type="other"
+        data-availability-input
+      />
+      <button type="submit" class="btn btn--primary">Check date</button>
+    </form>
+    <p
+      class="availability__result"
+      data-availability-result
+      role="status"
+      aria-live="polite"
+    ></p>
+  </div>
+</section>
+
+<style>
+  .availability {
+    background: var(--color-cream-warm);
+  }
+
+  .availability__inner {
+    max-width: 36rem;
+  }
+
+  .availability__lede {
+    margin-bottom: var(--space-6);
+  }
+
+  .availability__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .availability__form input[type="date"] {
+    flex: 1 1 14rem;
+    padding: 0.75rem 0.875rem;
+    border: 1px solid color-mix(in srgb, var(--color-slate-soft) 70%, transparent);
+    border-radius: var(--radius);
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+  }
+
+  .availability__form input[type="date"]:focus {
+    outline: 2px solid var(--color-rust);
+    outline-offset: 1px;
+  }
+
+  .availability__result {
+    min-height: 1.5rem;
+    margin-top: var(--space-4);
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .availability__result :where(a) {
+    color: var(--color-rust-deep);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-rust) 50%, transparent);
+    align-self: flex-start;
+  }
+
+  .availability__result :where(a):hover {
+    border-bottom-color: var(--color-rust);
+  }
+
+  .availability__result[data-state="available"] {
+    color: var(--color-rust-deep);
+  }
+
+  .availability__result[data-state="booked"] {
+    color: var(--color-slate);
+  }
+
+  .availability__result[data-state="invalid"] {
+    color: var(--color-slate);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
+<script>
+  import { bookedDates } from "../data/booked.ts";
+  import { site } from "../data/site.ts";
+
+  const form = document.querySelector<HTMLFormElement>("[data-availability-form]");
+  const input = document.querySelector<HTMLInputElement>("[data-availability-input]");
+  const result = document.querySelector<HTMLParagraphElement>("[data-availability-result]");
+
+  if (form && input && result) {
+    const booked = new Set(bookedDates);
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const value = input.value;
+      if (!value) {
+        result.dataset.state = "invalid";
+        result.textContent = "Pick a date to check.";
+        return;
+      }
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const picked = new Date(`${value}T00:00:00`);
+
+      if (picked < today) {
+        result.dataset.state = "invalid";
+        result.textContent = "That date is already past — try another.";
+        return;
+      }
+
+      const pretty = picked.toLocaleDateString(undefined, {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
+
+      const phoneDigits = site.phone.replace(/[^0-9+]/g, "");
+
+      if (booked.has(value)) {
+        result.dataset.state = "booked";
+        result.textContent = `${pretty} is already booked. Reach out and we can suggest nearby dates.`;
+      } else {
+        result.dataset.state = "available";
+        result.replaceChildren();
+        const headline = document.createElement("span");
+        headline.textContent = `${pretty} is currently open — let's talk.`;
+        const phoneLink = document.createElement("a");
+        phoneLink.href = `tel:${phoneDigits}`;
+        phoneLink.textContent = site.phone;
+        const emailLink = document.createElement("a");
+        emailLink.href = `mailto:${site.email}`;
+        emailLink.textContent = site.email;
+        result.append(headline, phoneLink, emailLink);
+      }
+    });
+  }
+</script>
