@@ -1,6 +1,7 @@
 ---
 import { site } from "../data/site.ts";
-import AvocetMark from "./AvocetMark.astro";
+import Divider from "./Divider.astro";
+import ContactCard from "./ContactCard.astro";
 
 const phoneHref = `tel:${site.phone.replace(/[^0-9+]/g, "")}`;
 const smsHref = `sms:${site.phone.replace(/[^0-9+]/g, "")}`;
@@ -9,27 +10,16 @@ const emailHref = `mailto:${site.email}`;
 
 <section class="contact-strip section" id="contact">
   <div class="container contact-strip__inner">
-    <div class="divider" aria-hidden="true">
-      <AvocetMark title="" />
-    </div>
+    <Divider />
     <h2 class="contact-strip__heading">Let's talk about your event.</h2>
     <p class="contact-strip__lede muted">
       Call, text, or email — usually a quick conversation gets us most of the way to a quote.
     </p>
-    <ul class="contact-strip__methods">
-      <li>
-        <span class="contact-strip__label">Call</span>
-        <a href={phoneHref}>{site.phone}</a>
-      </li>
-      <li>
-        <span class="contact-strip__label">Text</span>
-        <a href={smsHref}>{site.phone}</a>
-      </li>
-      <li>
-        <span class="contact-strip__label">Email</span>
-        <a href={emailHref}>{site.email}</a>
-      </li>
-    </ul>
+    <div class="contact-strip__methods">
+      <ContactCard label="Call" value={site.phone} href={phoneHref} />
+      <ContactCard label="Text" value={site.phone} href={smsHref} />
+      <ContactCard label="Email" value={site.email} href={emailHref} />
+    </div>
     <p class="contact-strip__more">
       <a href="/contact">More about working with us →</a>
     </p>
@@ -43,7 +33,7 @@ const emailHref = `mailto:${site.email}`;
   }
 
   .contact-strip__inner {
-    max-width: 42rem;
+    max-width: 48rem;
   }
 
   .contact-strip__heading {
@@ -56,40 +46,10 @@ const emailHref = `mailto:${site.email}`;
   }
 
   .contact-strip__methods {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto var(--space-6);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-    gap: 1.25rem;
-    max-width: 36rem;
-  }
-
-  .contact-strip__methods li {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .contact-strip__label {
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-slate);
-  }
-
-  .contact-strip__methods a {
-    font-family: var(--font-display);
-    font-size: 1.125rem;
-    color: var(--color-ink);
-    text-decoration: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-rust) 50%, transparent);
-    padding-bottom: 2px;
-  }
-
-  .contact-strip__methods a:hover {
-    color: var(--color-rust);
-    border-bottom-color: var(--color-rust);
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 0.75rem;
+    margin: 0 auto var(--space-6);
   }
 
   .contact-strip__more {

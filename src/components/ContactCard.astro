@@ -1,0 +1,47 @@
+---
+type Props = {
+  label: string;
+  value: string;
+  href: string;
+};
+
+const { label, value, href } = Astro.props;
+---
+
+<a class="contact-card" href={href}>
+  <span class="contact-card__label">{label}</span>
+  <span class="contact-card__value">{value}</span>
+</a>
+
+<style>
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding: 1.25rem;
+    background: var(--color-cream-warm);
+    border: 1px solid color-mix(in srgb, var(--color-slate-soft) 50%, transparent);
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
+  }
+
+  .contact-card:hover {
+    border-color: var(--color-rust);
+    background: color-mix(in srgb, var(--color-rust-soft) 18%, var(--color-cream-warm));
+    color: var(--color-rust-deep);
+  }
+
+  .contact-card__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-slate);
+  }
+
+  .contact-card__value {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+</style>

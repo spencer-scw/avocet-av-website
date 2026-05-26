@@ -71,6 +71,7 @@ h1 {
 
 h2 {
   font-size: clamp(1.875rem, 2.5vw + 1rem, 2.75rem);
+  text-wrap: balance;
 }
 
 h3 {

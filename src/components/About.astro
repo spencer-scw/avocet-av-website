@@ -1,0 +1,81 @@
+<section class="about section" id="about">
+  <div class="container">
+    <header class="about__header">
+      <p class="eyebrow">About</p>
+      <h2>Hi, I'm Sarah.</h2>
+    </header>
+    <div class="about__body">
+      <figure class="about__figure">
+        <img
+          src="/images/sarah-birding-headphones.jpg"
+          alt="Sarah birding with headphones on"
+          width="1483"
+          height="1112"
+          loading="lazy"
+        />
+      </figure>
+      <div class="about__text">
+        <p>
+          I spend my weekends watching shorebirds along Utah Lake.
+          Naming an AV (audio-visual) wedding business after the American Avocet,
+          which I love to see when I go out, felt perfect.
+        </p>
+        <p>
+          I did live sound for 2 years when I worked as an AV tech at the MTC in Provo, managing the audio
+          in small classrooms and large devotionals with thousands of missionaries.
+        </p>
+        <p>
+          The idea for Avocet AV came after the 4th or 5th time I said, "I bet I can fix this,"
+          and jumped to the rescue at a wedding reception experiencing audio difficulties.
+          I figured that with my own equipment, I could do an even better job.
+        </p>
+        <p>
+          When I'm not at a wedding, you can find me with my binoculars anywhere birds are found :)
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--color-cream);
+  }
+
+  .about__header {
+    max-width: 54rem;
+    margin-bottom: var(--space-8);
+  }
+
+  .about__body {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: start;
+  }
+
+  .about__figure {
+    margin: 0;
+  }
+
+  .about__figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+  }
+
+  .about__text p {
+    max-width: 38rem;
+  }
+
+  @media (max-width: 600px) {
+    .about__body {
+      grid-template-columns: 1fr;
+    }
+    .about__figure {
+      max-width: 28rem;
+      margin-inline: auto;
+    }
+  }
+</style>

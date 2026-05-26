@@ -1,6 +1,6 @@
 export const site = {
   name: "Avocet AV",
-  tagline: "Reception sound, done right.",
+  tagline: "Reception sound done right.",
   description:
     "Reception sound, ceremony amplification, and wireless mics for weddings and small events in Utah and Salt Lake counties.",
   serviceArea: "Utah & Salt Lake Counties",

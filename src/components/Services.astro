@@ -2,15 +2,15 @@
 const services = [
   {
     title: "Reception sound",
-    body: "Background music while guests mingle, transitioning into dance-friendly playlists. We tune the room so vocals stay clear and bass stays out of conversations.",
-  },
-  {
-    title: "Ceremony amplification",
-    body: "A small PA and lapel mic for the officiant, plus playback for processional and recessional music. Especially valuable for outdoor ceremonies.",
+    body: "Background music while guests mingle, transitioning into dance-friendly playlists. We tune the room (or the park!) so announcements are heard and and the music is crisp.",
   },
   {
     title: "Wireless mics for your MC",
-    body: "Two handheld wireless mics for the MC, toasts, prayers, and announcements. We handle the audio so your people can focus on what they're saying.",
+    body: "Two handheld wireless mics for the MC, toasts, prayers, and announcements. We'll handle the audio so your people can focus on what they're saying.",
+  },
+  {
+    title: "Ceremony amplification",
+    body: "Lapel mic for the officiant, plus processional and recessional music. Especially valuable for outdoor ceremonies. We'll be flexible to your needs.",
   },
 ];
 ---
@@ -19,10 +19,11 @@ const services = [
   <div class="container">
     <div class="services__intro">
       <p class="eyebrow">What we do</p>
-      <h2>Polished, well-paced — not a club night.</h2>
+      <h2>Polished, balanced, professional sound.</h2>
       <p class="muted">
-        Most of our clients want their reception to sound great without the
-        cost or energy of a traditional wedding DJ. That's the gap we fill.
+        We know you want your wedding to go smoothly. We can help it sound great too.
+        You won't have to worry if the MC can be heard or if the sound goes out at the wrong moment.
+        We'll make sure that all your guests have a great audio experience!
       </p>
     </div>
     <ul class="services__grid">
@@ -43,6 +44,10 @@ const services = [
 
   .services__intro {
     margin-bottom: var(--space-12);
+    max-width: 54rem;
+  }
+
+  .services__intro p:not(.eyebrow) {
     max-width: 38rem;
   }
 

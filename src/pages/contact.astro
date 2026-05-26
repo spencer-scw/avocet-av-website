@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import AvocetMark from "../components/AvocetMark.astro";
+import ContactCard from "../components/ContactCard.astro";
 import { site } from "../data/site.ts";
 
 const phoneHref = `tel:${site.phone.replace(/[^0-9+]/g, "")}`;
@@ -8,10 +8,6 @@ const smsHref = `sms:${site.phone.replace(/[^0-9+]/g, "")}`;
 const emailHref = `mailto:${site.email}`;
 
 const logistics = [
-  {
-    label: "Booking deposit",
-    body: "A small deposit holds your date. The balance is due before the event. We'll send a simple agreement with the details.",
-  },
   {
     label: "Lead time",
     body: "Most clients book 2–6 months out. Shorter timelines welcome when our calendar allows — use the availability checker on the home page for a quick yes/no.",
@@ -30,7 +26,13 @@ const logistics = [
 <Base title="Contact" description="Get in touch with Avocet AV about your wedding or event.">
   <section class="contact-hero section">
     <div class="container contact-hero__inner">
-      <AvocetMark class="contact-hero__mark" />
+      <img
+        class="contact-hero__mark"
+        src="/illustrations/avocet-jammin-2.svg"
+        alt="Avocet with headphones, illustration by Sarah"
+        width="414"
+        height="504"
+      />
       <p class="eyebrow">Contact</p>
       <h1>Let's talk.</h1>
       <p class="lede">
@@ -42,18 +44,9 @@ const logistics = [
 
   <section class="contact-methods section--tight">
     <div class="container contact-methods__inner">
-      <a class="contact-card" href={phoneHref}>
-        <span class="contact-card__label">Call</span>
-        <span class="contact-card__value">{site.phone}</span>
-      </a>
-      <a class="contact-card" href={smsHref}>
-        <span class="contact-card__label">Text</span>
-        <span class="contact-card__value">{site.phone}</span>
-      </a>
-      <a class="contact-card" href={emailHref}>
-        <span class="contact-card__label">Email</span>
-        <span class="contact-card__value">{site.email}</span>
-      </a>
+      <ContactCard label="Call" value={site.phone} href={phoneHref} />
+      <ContactCard label="Text" value={site.phone} href={smsHref} />
+      <ContactCard label="Email" value={site.email} href={emailHref} />
     </div>
   </section>
 
@@ -90,9 +83,9 @@ const logistics = [
   }
 
   .contact-hero__mark {
-    width: 4rem;
+    width: 18rem;
+    height: auto;
     margin: 0 auto var(--space-6);
-    color: var(--color-rust);
   }
 
   .contact-hero h1 {
@@ -107,37 +100,6 @@ const logistics = [
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
     gap: 0.75rem;
-  }
-
-  .contact-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.375rem;
-    padding: 1.25rem 1.25rem;
-    background: var(--color-cream-warm);
-    border: 1px solid color-mix(in srgb, var(--color-slate-soft) 50%, transparent);
-    text-decoration: none;
-    color: var(--color-ink);
-    transition: border-color 120ms ease, background 120ms ease;
-  }
-
-  .contact-card:hover {
-    border-color: var(--color-rust);
-    background: color-mix(in srgb, var(--color-rust-soft) 18%, var(--color-cream-warm));
-    color: var(--color-rust-deep);
-  }
-
-  .contact-card__label {
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-slate);
-  }
-
-  .contact-card__value {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 500;
   }
 
   .contact-info {
