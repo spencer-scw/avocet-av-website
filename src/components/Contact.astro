@@ -1,0 +1,65 @@
+---
+import { site } from "../data/site.ts";
+import ContactCard from "./ContactCard.astro";
+
+const phoneHref = `tel:${site.phone.replace(/[^0-9+]/g, "")}`;
+const smsHref = `sms:${site.phone.replace(/[^0-9+]/g, "")}`;
+const emailHref = `mailto:${site.email}`;
+---
+
+<section class="contact section" id="contact">
+  <div class="container">
+    <div class="contact__intro">
+      <img
+        class="contact__mark"
+        src="/illustrations/avocet-jammin-2.svg"
+        alt="Avocet with headphones, illustration by Sarah"
+        width="414"
+        height="504"
+      />
+      <p class="eyebrow">Contact</p>
+      <h2>Let's talk.</h2>
+      <p class="lede">
+        A quick call or text is the fastest way to check availability and get
+        a quote. We typically respond the same day.
+      </p>
+    </div>
+    <div class="contact__methods">
+      <ContactCard label="Call" value={site.phone} href={phoneHref} />
+      <ContactCard label="Text" value={site.phone} href={smsHref} />
+      <ContactCard label="Email" value={site.email} href={emailHref} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: var(--color-cream);
+  }
+
+  .contact__intro {
+    max-width: 36rem;
+    margin: 0 auto var(--space-8);
+    text-align: center;
+  }
+
+  .contact__mark {
+    width: 18rem;
+    height: auto;
+    margin: 0 auto var(--space-6);
+  }
+
+  .contact__intro h2 {
+    margin-bottom: var(--space-4);
+  }
+
+  .contact__intro .lede {
+    margin-inline: auto;
+  }
+
+  .contact__methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 0.75rem;
+  }
+</style>

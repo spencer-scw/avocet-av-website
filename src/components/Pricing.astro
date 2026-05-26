@@ -5,11 +5,10 @@ import { packages, additionalHourRate, promotion } from "../data/packages.ts";
 <section class="pricing section" id="packages">
   <div class="container">
     <div class="pricing__intro">
-      <p class="eyebrow">Packages</p>
-      <h2>Straightforward, predictable pricing.</h2>
+      <p class="eyebrow">Pricing</p>
+      <h2>Straightforward and affordable.</h2>
       <p class="muted">
-        Each package covers a fixed window — set up, run, and pack out. Need
-        more time? Add hours at a flat rate. No surprise bills.
+        Each package covers the duration of your event. I'll be on-site to make sure everything is tuned to your needs and running smoothly. Set up and take-down are free (not part of the time).
       </p>
     </div>
     {promotion.active && (
@@ -21,7 +20,7 @@ import { packages, additionalHourRate, promotion } from "../data/packages.ts";
     <ul class="pricing__grid">
       {packages.map((p) => (
         <li class:list={["pricing__card", { "pricing__card--featured": p.featured }]}>
-          {p.featured && <span class="pricing__badge">Most booked</span>}
+          {p.featured && <span class="pricing__badge">Recommended</span>}
           <h3 class="pricing__name">{p.name}</h3>
           <p class="pricing__duration">{p.duration}</p>
           <p class="pricing__price">{p.price}</p>
@@ -33,7 +32,7 @@ import { packages, additionalHourRate, promotion } from "../data/packages.ts";
       ))}
     </ul>
     <p class="pricing__footnote">
-      {additionalHourRate}<span class="sep" aria-hidden="true">·</span>Travel beyond service area quoted separately.
+      {additionalHourRate}<span class="sep" aria-hidden="true">·</span>Travel beyond service area or exceptional needs quoted separately.
     </p>
   </div>
 </section>
@@ -154,5 +153,14 @@ import { packages, additionalHourRate, promotion } from "../data/packages.ts";
     margin-top: 1.5rem;
     color: var(--color-slate);
     font-size: 0.9rem;
+  }
+
+  /* The footnote is long enough that finding a "fits on one line" breakpoint
+     is brittle. Always render the dot as a line break here — the two phrases
+     read cleanly as two lines regardless of viewport. */
+  .pricing__footnote .sep {
+    display: block;
+    font-size: 0;
+    margin-inline: 0;
   }
 </style>

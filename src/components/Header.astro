@@ -1,9 +1,6 @@
 ---
 import { site } from "../data/site.ts";
 import AvocetMark from "./AvocetMark.astro";
-
-const path = Astro.url.pathname;
-const isHome = path === "/" || path === "";
 ---
 
 <header class="site-header">
@@ -17,7 +14,7 @@ const isHome = path === "/" || path === "";
       <a href="/#packages">Packages</a>
       <a href="/#availability">Availability</a>
       <a href="/#faq">FAQ</a>
-      <a href="/contact" class:list={["site-nav__cta", { "is-active": !isHome }]}>Contact</a>
+      <a href="/#contact" class="site-nav__cta">Contact</a>
     </nav>
   </div>
 </header>
@@ -48,10 +45,14 @@ const isHome = path === "/" || path === "";
     color: var(--color-ink);
   }
 
-  .wordmark__mark {
+  /* :global() because the SVG comes from the AvocetMark child component
+     and doesn't carry Header's scoped data-astro-cid attribute, so a
+     plain scoped selector won't match it. */
+  :global(.wordmark__mark) {
     width: 1.75rem;
     height: auto;
     color: var(--color-rust);
+    transform: scaleX(-1);
   }
 
   .wordmark__text {
@@ -84,10 +85,6 @@ const isHome = path === "/" || path === "";
   .site-nav__cta {
     color: var(--color-rust) !important;
     font-weight: 500;
-  }
-
-  .site-nav__cta.is-active {
-    border-bottom-color: var(--color-rust) !important;
   }
 
   @media (max-width: 540px) {

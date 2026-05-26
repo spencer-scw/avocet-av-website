@@ -6,7 +6,7 @@ import { faqs } from "../data/faqs.ts";
   <div class="container">
     <div class="faq__intro">
       <p class="eyebrow">Frequently asked</p>
-      <h2>Things people ask before booking.</h2>
+      <h2>FAQs</h2>
     </div>
     <ul class="faq__list">
       {faqs.map((f) => (
@@ -17,7 +17,7 @@ import { faqs } from "../data/faqs.ts";
               <span class="faq__chevron" aria-hidden="true">+</span>
             </summary>
             <div class="faq__answer">
-              <p>{f.answer}</p>
+              <p set:html={f.answer}></p>
             </div>
           </details>
         </li>

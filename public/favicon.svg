@@ -1,13 +1,35 @@
-<svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
-  <rect width="120" height="80" fill="#f7f2eb"/>
-  <g fill="#b5613a" stroke="none">
-    <ellipse cx="62" cy="48" rx="24" ry="9"/>
-    <path d="M 46 41 C 42 30 40 20 42 10 C 45 5 50 5 51 11 C 51 22 50 32 50 42 Z"/>
-    <circle cx="46" cy="9" r="4.5"/>
-  </g>
-  <path d="M 42 7 Q 28 8 8 2" fill="none" stroke="#b5613a" stroke-width="2.5" stroke-linecap="round"/>
-  <g fill="none" stroke="#b5613a" stroke-width="2" stroke-linecap="round">
-    <line x1="56" y1="56" x2="53" y2="74"/>
-    <line x1="64" y1="56" x2="67" y2="74"/>
+<svg viewBox="0 0 21.760057 21.379219" xmlns="http://www.w3.org/2000/svg">
+  <rect width="21.760057" height="21.379219" fill="#f7f2eb"/>
+  <g transform="scale(-1 1) translate(-21.760057 0)">
+    <g transform="translate(-48.044969,-158.7693)">
+      <g transform="matrix(0.26458333,0,0,0.26458333,44.317708,157.46016)">
+        <g fill="#b5613a" stroke="none">
+          <ellipse cx="62.241112" cy="48.241116" rx="24" ry="10.205561"/>
+          <path d="m 38.224132,49.01698 c -4,-11 2.415213,-27.141567 4.415213,-37.141567 C 45.639345,6.8754126 50,5 51,11 51,22 41.741908,29.769712 47.950546,43.205561 Z"/>
+          <path d="m 50.66063,8.7618479 c 0.930209,2.4748121 -0.845769,3.9934311 -3.918102,5.1482301 -3.072333,1.1548 -6.514536,0.250986 -7.88466,-2.0135 -1.759944,-2.9087652 0.419492,-6.9637315 4.516074,-6.9485888 3.268048,0.01208 6.356479,1.3390455 7.286688,3.8138587 z"/>
+          <path
+            d="m 80.483875,42.737244 13.02006,7.83614 -17.72175,3.0139 z"
+            fill="#b5613a"
+            stroke="#b5613a"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </g>
+        <path
+          d="m 40.758922,11.219217 c -6.707056,2.510664 -15.516827,7.36386 -25.881,3.226017"
+          fill="none"
+          stroke="#b5613a"
+          stroke-width="1.58129"
+          stroke-linecap="round"
+        />
+        <g fill="none" stroke="#b5613a" stroke-width="2" stroke-linecap="round" transform="translate(3.1344583,-0.60278044)">
+          <path d="M 55.40821,56.48064 58.181,71.79126 51.18874,85.17298"/>
+        </g>
+        <g fill="none" stroke="#b5613a" stroke-width="2" stroke-linecap="round" transform="translate(9.332912,-0.42174005)">
+          <path d="M 55.40821,56.48064 58.181,71.79126 51.18874,85.17298"/>
+        </g>
+      </g>
+    </g>
   </g>
 </svg>
