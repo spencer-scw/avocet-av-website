@@ -10,13 +10,13 @@ const emailHref = `mailto:${site.email}`;
 <section class="contact section" id="contact">
   <div class="container">
     <div class="contact__intro">
-      <img
+      <!-- <img
         class="contact__mark"
-        src="/illustrations/avocet-jammin-2.svg"
+        src="/illustrations/avocet-circle.svg"
         alt="Avocet with headphones, illustration by Sarah"
         width="414"
         height="504"
-      />
+      /> -->
       <p class="eyebrow">Contact</p>
       <h2>Let's talk.</h2>
       <p class="lede">
@@ -42,6 +42,10 @@ const emailHref = `mailto:${site.email}`;
     margin: 0 auto var(--space-8);
     text-align: center;
   }
+
+	.contact .eyebrow {
+		max-width: none;
+	}
 
   .contact__mark {
     width: 18rem;

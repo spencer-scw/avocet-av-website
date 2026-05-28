@@ -6,6 +6,7 @@ export default defineConfig({
   server: {
     allowedHosts: [
       'skrewt-station.local',
+			'beep-boop.local'
     ]
   }
 });
