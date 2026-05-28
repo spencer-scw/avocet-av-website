@@ -38,6 +38,9 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  /* Offsets anchor scroll targets so the sticky header doesn't cover them. */
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -229,6 +232,9 @@ svg {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
