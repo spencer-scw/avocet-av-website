@@ -1,38 +1,53 @@
 ---
-import { packages, additionalHourRate, promotion } from "../data/packages.ts";
+import { baseRate, addOns, promotion, promotionActive } from "../data/packages.ts";
 ---
 
-<section class="pricing section" id="packages">
+<section class="pricing section" id="pricing">
   <div class="container">
     <div class="pricing__intro">
       <p class="eyebrow">Pricing</p>
       <h2>Straightforward and affordable.</h2>
       <p class="muted">
-        Each package covers the duration of your event. I'll be on-site to make sure everything is tuned to your needs and running smoothly. Set up and take-down are free (not part of the time).
+        Everything starts from a flat hourly rate. Set
+        up and take-down are always free, not part of the time.
       </p>
     </div>
-    {promotion.active && (
+    {promotionActive && (
       <aside class="pricing__promo" role="note" aria-label="Limited-time offer">
-        <p class="pricing__promo-eyebrow">{promotion.headline} · {promotion.percentOff}% off</p>
+        <p class="pricing__promo-eyebrow">
+          {promotion.headline} · {promotion.percentOff}% off through {promotion.deadlineLabel}
+        </p>
         <p class="pricing__promo-body">{promotion.body}</p>
       </aside>
     )}
-    <ul class="pricing__grid">
-      {packages.map((p) => (
-        <li class:list={["pricing__card", { "pricing__card--featured": p.featured }]}>
-          {p.featured && <span class="pricing__badge">Recommended</span>}
-          <h3 class="pricing__name">{p.name}</h3>
-          <p class="pricing__duration">{p.duration}</p>
-          <p class="pricing__price">{p.price}</p>
-          {p.regularPrice && (
-            <p class="pricing__regular">Regularly {p.regularPrice}</p>
-          )}
-          <p class="pricing__desc">{p.description}</p>
-        </li>
+    <div class="pricing__sheet">
+      <div class="rate rate--foundation">
+        <div class="rate__head">
+          <h3 class="rate__label">{baseRate.label}</h3>
+          <p class="rate__amount">
+            {baseRate.regularAmount && (
+              <span class="rate__was">{baseRate.regularAmount}</span>
+            )}
+            {baseRate.amount}
+          </p>
+        </div>
+        <p class="rate__note">{baseRate.note}</p>
+      </div>
+
+      <p class="pricing__addons-label">Add as your event needs</p>
+
+      {addOns.map((item) => (
+        <div class="rate">
+          <div class="rate__head">
+            <h3 class="rate__label">{item.label}</h3>
+            <p class="rate__amount">{item.amount}</p>
+          </div>
+          <p class="rate__note">{item.note}</p>
+        </div>
       ))}
-    </ul>
+    </div>
     <p class="pricing__footnote">
-      {additionalHourRate}<span class="sep" aria-hidden="true">·</span>Travel beyond service area or exceptional needs quoted separately.
+      Travel beyond our service area or exceptional needs quoted separately.
     </p>
   </div>
 </section>
@@ -48,7 +63,7 @@ import { packages, additionalHourRate, promotion } from "../data/packages.ts";
   }
 
   .pricing__intro p:not(.eyebrow) {
-    max-width: 38rem;
+    max-width: 42rem;
   }
 
   .pricing__promo {
@@ -63,7 +78,7 @@ import { packages, additionalHourRate, promotion } from "../data/packages.ts";
     font-family: var(--font-body);
     font-size: 0.8125rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-rust-deep);
     margin: 0 0 0.5rem;
@@ -76,91 +91,74 @@ import { packages, additionalHourRate, promotion } from "../data/packages.ts";
     line-height: 1.55;
   }
 
-  .pricing__grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: 1.25rem;
+  .pricing__sheet {
+    max-width: 42rem;
   }
 
-  .pricing__card {
-    position: relative;
-    background: var(--color-cream);
-    border: 1px solid color-mix(in srgb, var(--color-slate-soft) 50%, transparent);
-    padding: 1.75rem 1.5rem 1.5rem;
+  .rate {
+    border-top: 1px solid color-mix(in srgb, var(--color-slate-soft) 50%, transparent);
+    padding-block: 1.25rem;
+  }
+
+  .rate--foundation {
+    border-top: 2px solid var(--color-rust);
+    padding-top: 1.25rem;
+  }
+
+  .rate__head {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
-  .pricing__card--featured {
-    border-color: var(--color-rust);
-    box-shadow: 0 0 0 1px var(--color-rust);
-  }
-
-  .pricing__badge {
-    position: absolute;
-    top: -0.625rem;
-    left: 1.5rem;
-    background: var(--color-rust);
-    color: var(--color-cream);
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.625rem;
-    border-radius: var(--radius);
-  }
-
-  .pricing__name {
-    font-size: 1.25rem;
+  .rate__label {
+    font-size: 1.2rem;
     margin: 0;
   }
 
-  .pricing__duration {
-    color: var(--color-slate);
-    font-size: 0.95rem;
+  .rate__amount {
     margin: 0;
-  }
-
-  .pricing__price {
+    flex-shrink: 0;
     font-family: var(--font-display);
-    font-size: 2rem;
-    color: var(--color-rust);
-    margin: 0.25rem 0 0;
+    font-size: 1.5rem;
     font-weight: 500;
+    color: var(--color-rust);
+    white-space: nowrap;
   }
 
-  .pricing__regular {
-    margin: 0.125rem 0 0.5rem;
+  .rate--foundation .rate__amount {
+    font-size: 1.75rem;
+  }
+
+  .rate__was {
+    font-size: 1.1rem;
     color: var(--color-slate);
-    font-size: 0.85rem;
     text-decoration: line-through;
     text-decoration-color: color-mix(in srgb, var(--color-slate) 60%, transparent);
-    text-decoration-thickness: 1px;
+    margin-right: 0.4rem;
   }
 
-  .pricing__desc {
-    margin: 0;
+  .rate__note {
+    margin: 0.5rem 0 0;
     color: var(--color-charcoal);
     font-size: 0.95rem;
     line-height: 1.55;
+    max-width: 34rem;
+  }
+
+  .pricing__addons-label {
+    margin: var(--space-8) 0 0;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-slate);
   }
 
   .pricing__footnote {
     margin-top: 1.5rem;
     color: var(--color-slate);
     font-size: 0.9rem;
-  }
-
-  /* The footnote is long enough that finding a "fits on one line" breakpoint
-     is brittle. Always render the dot as a line break here — the two phrases
-     read cleanly as two lines regardless of viewport. */
-  .pricing__footnote .sep {
-    display: block;
-    font-size: 0;
-    margin-inline: 0;
   }
 </style>

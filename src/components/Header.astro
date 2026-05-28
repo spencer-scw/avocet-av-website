@@ -8,10 +8,11 @@ import AvocetMark from "./AvocetMark.astro";
     <a href="/" class="wordmark" aria-label={`${site.name} — home`}>
       <AvocetMark class="wordmark__mark" />
       <span class="wordmark__text">{site.name}</span>
+      <span class="wordmark__owner">by {site.owner}</span>
     </a>
     <nav class="site-nav" aria-label="Primary">
       <a href="/#about">About</a>
-      <a href="/#packages">Packages</a>
+      <a href="/#pricing">Pricing</a>
       <a href="/#availability">Availability</a>
       <a href="/#faq">FAQ</a>
       <a href="/#contact" class="site-nav__cta">Contact</a>
@@ -59,6 +60,15 @@ import AvocetMark from "./AvocetMark.astro";
     font-family: var(--font-display);
     font-size: 1.375rem;
     font-weight: 500;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .wordmark__owner {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 200;
+    color: var(--color-charcoal); 
     letter-spacing: -0.01em;
     white-space: nowrap;
   }

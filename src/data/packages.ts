@@ -1,70 +1,57 @@
-type PackageData = {
-  name: string;
-  duration: number;
-  description: string;
-  featured?: boolean;
-};
-
-export type Package = {
-  name: string;
-  duration: string;
-  price: string;
-  regularPrice?: string;
-  description: string;
-  featured?: boolean;
-};
-
-const packages_data: PackageData[] = [
-  {
-    name: "Short Reception",
-    duration: 2,
-    description:
-      "Ideal for shorter receptions and luncheons. Two wireless mics, two large speakers, full setup and takedown.",
-  },
-  {
-    name: "Standard Reception",
-    duration: 3,
-    description:
-      "Our standard option. Background and dancing music, two wireless mics for toasts and MC, two large speakers, full setup and takedown.",
-    featured: true,
-  },
-  {
-    name: "Extended Reception",
-    duration: 4,
-    description:
-      "For longer receptions or ceremony-plus-reception coverage. Includes everything in Standard with extended runtime. We're happy to work with your specific needs.",
-  },
-];
-
-
-const BASE = 50
-const HOURLY = 150
+const HOURLY = 75;
+const SPEAKER_FEE = 25;
+const CEREMONY_FEE = 50;
 
 export type Promotion = {
   active: boolean;
   percentOff: number;
+  deadline: string; // ISO date; promo auto-expires after this at build time
+  deadlineLabel: string; // human-friendly form for copy
   headline: string;
   body: string;
 };
 
 export const promotion: Promotion = {
   active: true,
-  percentOff: 50,
+  percentOff: 33,
+  deadline: "2026-08-01",
+  deadlineLabel: "August 1",
   headline: "Founding client pricing",
-  body: "I'm just getting started in this business! I wanted to offer a discount to the first few events I run. I'll ask if I can use pictures of my setup at your event, and for an honest review.",
+  body: "I'm just getting started, so I'm offering a reduced rate if you call before August 1. In exchange, I'll ask to use a few photos from your event and for an honest review.",
 };
 
-const applyPromotion = (price: number): number =>
-  promotion.active ? Math.round(price * (1 - promotion.percentOff / 100)) : price;
+// Live only if manually enabled AND before the deadline. The daily CI rebuild
+// means the promo switches itself off after the deadline with no code change.
+export const promotionActive =
+  promotion.active && new Date() < new Date(`${promotion.deadline}T00:00:00`);
 
-export const packages: Package[] = packages_data.map((p) => {
-  const standardPrice = BASE + HOURLY * p.duration;
-  return {
-    ...p,
-    duration: `${p.duration} Hours`,
-    price: `$${applyPromotion(standardPrice)}`,
-    regularPrice: promotion.active ? `$${standardPrice}` : undefined,
-  };
-});
+const effectiveHourly = promotionActive
+  ? Math.round(HOURLY * (1 - promotion.percentOff / 100))
+  : HOURLY;
 
-export const additionalHourRate = `$${applyPromotion(HOURLY)} / additional hour`;
+export type RateItem = {
+  label: string;
+  amount: string;
+  regularAmount?: string; // struck-through full rate, when the promo is live
+  note: string;
+};
+
+export const baseRate: RateItem = {
+  label: "Hourly rate",
+  amount: `$${effectiveHourly} / hour`,
+  regularAmount: promotionActive ? `$${HOURLY}` : undefined,
+  note: "The starting rate for every booking. Includes two wireless mics, live mixing, and me running sound from start to finish.",
+};
+
+export const addOns: RateItem[] = [
+  {
+    label: "Speakers",
+    amount: `+$${SPEAKER_FEE}`,
+    note: "For venues without their own sound system. I bring two large speakers and handle the work of hauling, placing, and tuning them to the space.",
+  },
+  {
+    label: "Ceremony sound",
+    amount: `+$${CEREMONY_FEE}`,
+    note: "For wedding ceremonies. Includes a lapel mic for the officiant and ceremony music. Usually a separate setup from the reception space.",
+  },
+];
