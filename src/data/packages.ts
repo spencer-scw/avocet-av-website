@@ -14,10 +14,10 @@ export type Promotion = {
 export const promotion: Promotion = {
   active: true,
   percentOff: 33,
-  deadline: "2026-08-01",
-  deadlineLabel: "August 1",
+  deadline: "2027-01-01",
+  deadlineLabel: "January 1",
   headline: "Founding client pricing",
-  body: "I'm just getting started, so I'm offering a reduced rate if you call before August 1. In exchange, I'll ask to use a few photos from your event and for an honest review.",
+  body: "I'm just getting started, so I'm offering a reduced rate! In exchange, I'll ask to use a few photos from your event and for an honest review.",
 };
 
 // Live only if manually enabled AND before the deadline. The daily CI rebuild

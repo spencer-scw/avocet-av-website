@@ -15,6 +15,10 @@ export const faqs: FAQ[] = [
     answer:
       "We can support ceremonies in addition to the reception. Outdoor ceremonies, in particular, benefit from speakers and a lapel mic for the officiant. Mention it when you reach out so we know how best to help you.",
   },
+	{
+		question: "Do you do events that aren't wedding receptions?",
+		answer: "Of course! If you are in need of someone to run audio for a small event or gathering, I'll gladly help out."
+	},
   {
     question: "Are you a full DJ service?",
     answer:
